@@ -1,0 +1,48 @@
+{
+  "name": "hawki-chat-client",
+  "version": "1.0.0",
+  "description": "End-to-end encrypted chat client for HAWKI server",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "rollup -c",
+    "test": "jest",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
+  "keywords": [
+    "chat",
+    "encryption",
+    "e2ee",
+    "secure",
+    "messaging"
+  ],
+  "author": "HAWKI Team",
+  "license": "MIT",
+  "dependencies": {
+    "laravel-echo": "^1.15.0",
+    "pako": "^2.1.0",
+    "pusher-js": "^8.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.5",
+    "@babel/preset-env": "^7.22.5",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-commonjs": "^25.0.1",
+    "@rollup/plugin-node-resolve": "^15.1.0",
+    "@rollup/plugin-terser": "^0.4.3",
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0",
+    "rimraf": "^5.0.1",
+    "rollup": "^3.25.1",
+    "rollup-plugin-dts": "^5.3.0"
+  },
+  "browserslist": [
+    "defaults",
+    "not IE 11"
+  ]
+}
