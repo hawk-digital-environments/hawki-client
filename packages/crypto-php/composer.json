@@ -1,0 +1,29 @@
+{
+  "name": "hawk-hhg/hawki-crypto",
+  "description": "The shared cryptographic module of hawki",
+  "type": "library",
+  "license": "MIT",
+  "version": "0.0.1",
+  "autoload": {
+    "psr-4": {
+      "Hawk\\HawkiCrypto\\": "src/",
+      "Hawk\\HawkiCrypto\\Tests\\": "tests/"
+    }
+  },
+  "minimum-stability": "stable",
+  "require": {
+    "php": "^8.2",
+    "ext-openssl": "*",
+    "phpseclib/phpseclib": "^3.0"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-latest",
+    "phpunit/phpunit": "^11.5.6"
+  },
+  "scripts": {
+    "test:unit": "phpunit --testsuite unit --exclude-group integration",
+    "test:unit:coverage": "XDEBUG_MODE=coverage phpunit --testsuite unit --exclude-group integration --coverage-html ./.phpunit.coverage; cp ./tests/coverage.dark.css .phpunit.coverage/_css/custom.css",
+    "test:unit:coverage:text": "XDEBUG_MODE=coverage phpunit --testsuite unit --exclude-group integration --coverage-text",
+    "test:unit:coverage:clover": "XDEBUG_MODE=coverage phpunit --testsuite unit --coverage-clover .phpunit.coverage/coverage-clover.xml"
+  }
+}
