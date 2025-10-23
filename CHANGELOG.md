@@ -1,3 +1,13 @@
+## [1.1.3](https://github.com/hawk-digital-environments/hawki-client/compare/v1.1.2...v1.1.3) (2025-10-23)
+
+
+### Bug Fixes
+
+* configure files to publish ([12136c3](https://github.com/hawk-digital-environments/hawki-client/commit/12136c3ece24be427217a00bec3e8bb645d066ae))
+* ensure dynamic version replacement (including rc versions) ([36e53a5](https://github.com/hawk-digital-environments/hawki-client/commit/36e53a5f4552b51efd0a1cab38149af4c26fce54))
+
+
+
 ## [1.1.2](https://github.com/hawk-digital-environments/hawki-client/compare/v1.1.1...v1.1.2) (2025-10-23)
 
 
