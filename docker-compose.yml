@@ -1,0 +1,19 @@
+services:
+  node:
+    container_name: ${PROJECT_NAME}-node
+    image: ${PROJECT_NAME}-node:dev
+    build:
+      context: .
+      args:
+        - DOCKER_RUNTIME=${DOCKER_RUNTIME:-docker}
+        - DOCKER_GID=${DOCKER_GID:-1000}
+        - DOCKER_UID=${DOCKER_UID:-1000}
+    restart: no
+    working_dir: /build
+    volumes:
+      - ./:/build
+      - ./:/var/www/html
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    entrypoint: bash
+    tty: true

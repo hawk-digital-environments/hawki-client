@@ -1,0 +1,26 @@
+{
+  "include": [
+    "src/**/*.ts"
+  ],
+  "compilerOptions": {
+    "moduleResolution": "bundler",
+    "baseUrl": ".",
+    "paths": {
+      "@lib/*": [
+        "src/*"
+      ]
+    },
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "declaration": true,
+    "declarationDir": "./dist/types",
+    "target": "es2017",
+    "module": "esnext",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true
+  }
+}

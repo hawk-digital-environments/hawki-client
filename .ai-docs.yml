@@ -1,0 +1,44 @@
+additional_context:
+  - type: "static"
+    hints:
+      - type:
+          - "relevantForAbstractions"
+          - "relevantForGettingStarted"
+        content: |
+          It is of utmost importance to mention that the HAWKI client library is designed to work both in the frontend of HAWKI itself, 
+          using the "type" property in `HawkiClientOptions`. It can either be set to: "internal", which uses the internal HAWKI authentication mechanisms
+          as well as frontend features like session management, CSRF protection, etc. The connection in this case is documented in: "internal/connection/internal/connectInternal.ts"
+          Alternatively, it can be set to "external", which allows the HAWKI client to be used in external applications,
+          this needs to be configured in the backend and requires creating an "external app" in HAWKI with its own client credentials.
+          The connection in this case is documented in: "internal/connection/external/connectExternal.ts"
+      - type: "relevantForGettingStarted"
+        content: |
+          A complete example on implementing a HAWKI client with a vanilla javascript frontend and a PHP backend can be found
+          in the "hawki-client-example" repository: https://github.com/hawk-digital-environments/hawki-client-example
+          The required backend implementation for securely handling the communication between the frontend and HAWKI server
+          is provided in the "hawki-client-backend-php" repository: https://github.com/hawk-digital-environments/hawki-client-backend-php
+  - type: "git"
+    repository: "https://github.com/hawk-digital-environments/hawki-client-backend-php"
+    hints:
+      - type:
+          - "relevantForAbstractions"
+          - "relevantForGettingStarted"
+        pattern: "docs/getting-started*.md"
+        description: |
+          The HAWKI Client MUST be installed on an external client with a dedicated backend, which is used
+          to securely handle the communication between the app and the HAWKI server. This document provides
+          the necessary steps to get started with the HAWKI Client Backend in PHP. It should be mentioned
+          in context of creating a new HAWKI client with this framework.
+          A PHP backend implementation can be found in this repository: https://github.com/hawk-digital-environments/hawki-client-backend-php
+  - type: "git"
+    repository: "https://github.com/hawk-digital-environments/hawki-client-example"
+    hints:
+      - type: "relevantForGettingStarted"
+        pattern:
+          - "public/index.html"
+          - "public/js/**/*.js"
+          - "backend/**/*.php"
+        description: |
+          This content shows how the HAWKI client is being used in a simple vanilla javascript frontend. It also
+          has a PHP backend example that demonstrates how to set up authentication with HAWKI.
+          The example can be found in this repository: https://github.com/hawk-digital-environments/hawki-client-example

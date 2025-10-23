@@ -1,0 +1,45 @@
+name: Create new Release (Frontend)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'examples/**'
+      - '.github/workflows/release.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    name: Release
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: TriPSs/conventional-changelog-action@v5
+        with:
+          version-file: './package.json'
+          github-token: ${{ secrets.github_token }}
+
+      - name: Update version in src/version.ts
+        run: |
+          sed -i "s/version: '.*'/version: '${{ steps.changelog.outputs.version }}'/" src/version.ts
+          
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Publish to NPM
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

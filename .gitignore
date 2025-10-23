@@ -1,0 +1,46 @@
+# IDEA Code Style
+.idea/*
+!.idea/copyright/
+!.idea/copyright/*
+!.idea/codeStyles/
+!.idea/codeStyles/*
+
+# Credentials
+/auth.json
+
+# Log files
+*.log
+
+# Dependencies
+/node_modules
+/vendor
+
+# Editor files
+/.fleet
+/.nova
+/.vscode
+/.zed
+
+# Composer
+vendor
+
+# PHPUnit
+.phpunit.coverage
+.phpunit.result.cache
+.phpunit.cache
+
+# Example files
+examples/docker-compose.override.yml
+examples/app/vendor
+examples/app/public/frontend
+
+# Examples (keycloak infrastructure)
+docker-compose.override.yml
+
+# Frontend
+/dist
+
+# Codecov
+codecov
+codecov.SHA256SUM
+codecov.SHA256SUM.sig
