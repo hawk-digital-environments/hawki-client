@@ -10,6 +10,7 @@ on:
       - '.github/workflows/release.yml'
 
 permissions:
+  id-token: write
   contents: write
 
 jobs:
@@ -27,7 +28,7 @@ jobs:
       - name: Update version in src/version.ts
         run: |
           sed -i "s/version: '.*'/version: '${{ steps.changelog.outputs.version }}'/" src/version.ts
-          
+
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -40,6 +41,4 @@ jobs:
         run: npm run build
 
       - name: Publish to NPM
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish
