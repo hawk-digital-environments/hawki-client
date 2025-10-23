@@ -3,7 +3,7 @@ import fs from 'fs';
 const versionFilePath = './src/version.ts';
 
 export function preCommit({version}) {
-    const versionPattern = /version:\s*'(\d+\.\d+\.\d+)'/;
+    const versionPattern = /version:\s*'([^']*)'/;
     const newVersion = `version: '${version}'`;
     let content = fs.readFileSync(versionFilePath, 'utf8');
     content = content.replace(versionPattern, newVersion);
