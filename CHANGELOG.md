@@ -1,3 +1,12 @@
+## [1.1.2](https://github.com/hawk-digital-environments/hawki-client/compare/v1.1.1...v1.1.2) (2025-10-23)
+
+
+### Bug Fixes
+
+* ensure dynamic version replacement ([f03fccf](https://github.com/hawk-digital-environments/hawki-client/commit/f03fccf60587694fa182777f2d006c04aa18f540))
+
+
+
 ## [1.1.1](https://github.com/hawk-digital-environments/hawki-client/compare/v1.1.0...v1.1.1) (2025-10-23)
 
 
