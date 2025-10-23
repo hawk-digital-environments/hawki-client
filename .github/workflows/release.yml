@@ -23,6 +23,7 @@ jobs:
       - uses: TriPSs/conventional-changelog-action@v5
         with:
           version-file: './package.json'
+          pre-commit: './.build/inject-library-version.js'
           github-token: ${{ secrets.github_token }}
 
       - name: Update version in src/version.ts
