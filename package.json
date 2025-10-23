@@ -26,8 +26,8 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "require": "./dist/hawki-client.umd.js",
-      "import": "./dist/hawki-client.es.js"
+      "require": "./dist/hawki-client.umd.cjs",
+      "import": "./dist/hawki-client.js"
     }
   },
   "author": "HAWKI Team <ki@hawk.de>",
