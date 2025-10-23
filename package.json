@@ -5,6 +5,7 @@
   "main": "./dist/hawki-client.umd.js",
   "module": "./dist/hawki-client.mjs",
   "types": "./dist/index.d.ts",
+  "repository": "https://github.com/hawk-digital-environments/hawki-client",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node_modules/.bin/vite build",
