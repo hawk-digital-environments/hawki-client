@@ -38,6 +38,7 @@ additional_context:
           - "public/index.html"
           - "public/js/**/*.js"
           - "backend/**/*.php"
+          - "README.md"
         description: |
           This content shows how the HAWKI client is being used in a simple vanilla javascript frontend. It also
           has a PHP backend example that demonstrates how to set up authentication with HAWKI.
