@@ -16,6 +16,13 @@
     "HAWK",
     "HAWKI"
   ],
+  "files": [
+    "dist",
+    "docs",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
