@@ -1,7 +1,8 @@
-const fs = require('fs');
+import fs from 'fs';
+
 const versionFilePath = './src/version.ts';
 
-module.exports.preCommit = ({version}) => {
+export function preCommit({version}) {
     const defaultVersion = 'version: \'0.0.0\'';
     const newVersion = `version: '${version}'`;
     let content = fs.readFileSync(versionFilePath, 'utf8');
@@ -9,4 +10,4 @@ module.exports.preCommit = ({version}) => {
     fs.writeFileSync(versionFilePath, content, 'utf8');
     console.log(`Injected version ${version} into ${versionFilePath}`);
     console.debug('Content after injection:', content);
-};
+}
