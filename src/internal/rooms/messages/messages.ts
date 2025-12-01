@@ -59,7 +59,7 @@ export const RoomMessageResource = defineResource<{
             ...resource,
             is_ai: !!resource.model,
             ai: resource.model ? {model: resource.model} : undefined,
-            is_read: resource.read_by.includes(userId),
+            is_read: resource.read_by.includes(userId) ? 1 : 0,
             is_edited: resource.created_at !== resource.updated_at,
             thread_id: resource.thread_id ?? -1,
             created_at: new Date(resource.created_at),

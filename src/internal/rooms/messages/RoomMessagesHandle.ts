@@ -127,7 +127,7 @@ export function createRoomMessagesHandle(connection: Connection, members: RoomMe
                 memberId: resource.member_id,
                 author: member,
                 isAi: resource.is_ai,
-                isRead: resource.is_read,
+                isRead: resource.is_read === 1,
                 readBy: resource.read_by,
                 isEdited: resource.is_edited,
                 hasThread: resource.has_thread,
