@@ -1,3 +1,17 @@
+# [1.3.0](https://github.com/hawk-digital-environments/hawki-client/compare/v1.2.0...v1.3.0) (2025-12-01)
+
+
+### Bug Fixes
+
+* ensure "is_read" can be indexed for messages table ([f708dcb](https://github.com/hawk-digital-environments/hawki-client/commit/f708dcb55ec4fcbe2aad31dc6b38ebbb89954ee6))
+
+
+### Features
+
+* **messages:** add countUnreadMap to extract the unread count of all rooms ([6e794ca](https://github.com/hawk-digital-environments/hawki-client/commit/6e794ca5cb326a919d3b186d3a36b8718ec8c0f2))
+
+
+
 # [1.2.0](https://github.com/hawk-digital-environments/hawki-client/compare/v1.1.4...v1.2.0) (2025-12-01)
 
 
@@ -33,16 +47,6 @@
 ### Bug Fixes
 
 * ensure dynamic version replacement ([f03fccf](https://github.com/hawk-digital-environments/hawki-client/commit/f03fccf60587694fa182777f2d006c04aa18f540))
-
-
-
-## [1.1.1](https://github.com/hawk-digital-environments/hawki-client/compare/v1.1.0...v1.1.1) (2025-10-23)
-
-
-### Bug Fixes
-
-* remove php packagfile ([2e3611a](https://github.com/hawk-digital-environments/hawki-client/commit/2e3611aa49f01749f260ed0529974a5a88cd8b8f))
-* remove php packagfile ([43261b7](https://github.com/hawk-digital-environments/hawki-client/commit/43261b709e235ce98e33e32e57eba6d0e531b838))
 
 
 
