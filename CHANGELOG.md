@@ -1,3 +1,13 @@
+## [1.1.4](https://github.com/hawk-digital-environments/hawki-client/compare/v1.1.3...v1.1.4) (2025-10-23)
+
+
+### Bug Fixes
+
+* ensure correct entrypoints in package.json ([5cfb0b7](https://github.com/hawk-digital-environments/hawki-client/commit/5cfb0b7de06b2e93fada8c044ef74a6c7edd8b21))
+* ensure correct exports in package.json ([9fbdca1](https://github.com/hawk-digital-environments/hawki-client/commit/9fbdca1356e829aa9820ccdd3eb4d05412233f52))
+
+
+
 ## [1.1.3](https://github.com/hawk-digital-environments/hawki-client/compare/v1.1.2...v1.1.3) (2025-10-23)
 
 
@@ -33,15 +43,6 @@
 ### Features
 
 * refactoring done ([21263a9](https://github.com/hawk-digital-environments/hawki-client/commit/21263a9bf777b800e8ac9537d616b034e324cf21))
-
-
-
-# [0.1.0](https://github.com/hawk-digital-environments/hawki-client/compare/f4655ade57d9fa43d06f326e0f180d8272660014...v0.1.0) (2025-07-08)
-
-
-### Features
-
-* introduce crypto-php package ([f4655ad](https://github.com/hawk-digital-environments/hawki-client/commit/f4655ade57d9fa43d06f326e0f180d8272660014))
 
 
 
