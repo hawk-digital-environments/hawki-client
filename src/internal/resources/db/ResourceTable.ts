@@ -102,10 +102,32 @@ export function createResourceTable<TResourceName extends PersistedResourceName>
         )
     );
 
+    /**
+     * Allows you to create a store that counts the number of records in the table, optionally filtered by a provided function.
+     *
+     * @example
+     * const count = () => resourceTable.count.get('all', db => db.count());
+     */
     const count = createStoreFrontProvider<number, (db: Table<ResourceStoredType<TResourceName>, number>) => Promise<number>>(
         (filter) => createLiveQueryStore<number>(
             connection.log,
             () => filter ? filter(table) : table.count()
+        )
+    );
+
+    /**
+     * Allows you to create a store that can fetch arbitrary data from the table.
+     * This is useful for complex queries that are not covered by the other store providers.
+     * Note, this is a function that returns a store provider, so you need to call it to get the store.
+     *
+     * @example
+     * const myStore = resourceTable.free<MyType>();
+     * const getMyStoreData = async () => myStore.get(db => db.where('someIndex').equals('someValue').toArray());
+     */
+    const free = <T>() => createStoreFrontProvider<T, (db: Table<ResourceStoredType<TResourceName>, number>) => Promise<T>>(
+        (filter) => createLiveQueryStore<T>(
+            connection.log,
+            () => filter ? filter(table) : Promise.resolve(undefined as T)
         )
     );
 
@@ -114,6 +136,7 @@ export function createResourceTable<TResourceName extends PersistedResourceName>
         list,
         one,
         count,
+        free,
         set,
         remove
     };

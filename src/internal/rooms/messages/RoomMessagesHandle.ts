@@ -12,7 +12,7 @@ import type {RoomMembersHandle} from '../members/RoomMembersHandle.js';
 import {deriveMap, filterUndefinedAndNullAsync} from '../../resources/stores/utils.js';
 import type {Table} from 'dexie';
 import {sendMessage, type SendMessageOptions} from './send.js';
-import type {ReactiveStoreFront} from '@lib/internal/resources/stores/ReactiveStoreFront.js';
+import {type ReactiveStoreFront} from '@lib/internal/resources/stores/ReactiveStoreFront.js';
 
 export interface MessageListConstraints {
     /**
@@ -234,6 +234,29 @@ export function createRoomMessagesHandle(connection: Connection, members: RoomMe
             (table) => table.where({room_id: room.id, is_read: 0}).count()
         );
 
+    const countUnreadMapProvider = records.free<Map<number, number>>();
+
+    /**
+     * Returns a map of room IDs to their number of unread messages.
+     * This is used to display the unread count in the room list.
+     * Note: This only includes rooms that have at least one unread message.
+     */
+    const countUnreadMap = () =>
+        countUnreadMapProvider.get(
+            'unreadMap',
+            async (table) => {
+                const map = new Map<number, number>();
+                await table
+                    .orderBy('room_id')
+                    .filter(record => record.is_read === 0)
+                    .each(record => {
+                        const current = map.get(record.room_id) || 0;
+                        map.set(record.room_id, current + 1);
+                    });
+                return map;
+            }
+        );
+
     /**
      * Returns the total number of messages in the room.
      * @param room
@@ -350,6 +373,7 @@ export function createRoomMessagesHandle(connection: Connection, members: RoomMe
         lastMessageAtMap,
         count,
         countUnread,
+        countUnreadMap,
         list,
         one,
         send,
