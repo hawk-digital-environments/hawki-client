@@ -39,10 +39,15 @@ export function createRoomMembersHandle(
     /**
      * Returns a list of all members in the room.
      */
-    const list = (room: Room) =>
+    const list = (room?: Room) =>
         records.list.get(
-            room.id.toString(),
-            table => table.where('room_id').equals(room.id).toArray()
+            room ? room.id.toString() : 'all',
+            table => {
+                if (room) {
+                    return table.where('room_id').equals(room.id).toArray();
+                }
+                return table.toArray();
+            }
         ).derive(
             'models',
             (resources, users) =>
@@ -77,14 +82,14 @@ export function createRoomMembersHandle(
      * Returns a map of all members in the room, keyed by their member ID.
      * @param room
      */
-    const map = (room: Room) =>
+    const map = (room?: Room) =>
         list(room)
             .derive('map', models => deriveMap(models, model => model.id));
 
     /**
      * Returns a map of all members in the room, keyed by their user ID.
      */
-    const mapByUserId = (room: Room) =>
+    const mapByUserId = (room?: Room) =>
         list(room)
             .derive('mapByUserId', models => deriveMap(models, model => model.userId));
 

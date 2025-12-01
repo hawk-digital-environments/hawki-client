@@ -3,19 +3,16 @@ import type {Connection} from '../../connection/connection.js';
 import type {Room} from '../rooms.js';
 import {editMessage, markMessageAsRead} from './api.js';
 import {refreshAiMessage as doRefreshAiMessage} from './aiMessages.js';
-import {
-    decryptSymmetric,
-    loadSymmetricCryptoValue,
-    type SymmetricCryptoValue
-} from '../../encryption/symmetric.js';
+import {decryptSymmetric, loadSymmetricCryptoValue, type SymmetricCryptoValue} from '../../encryption/symmetric.js';
 import type {RoomKeys} from '../../encryption/keychain/KeychainHandle.js';
 import type {ResourceStoredType} from '../../resources/resources.js';
 import type {Member} from '../members/members.js';
 import {createRemovedMemberDummy} from '../members/createRemovedMemberDummy.js';
 import type {RoomMembersHandle} from '../members/RoomMembersHandle.js';
-import {filterUndefinedAndNullAsync} from '../../resources/stores/utils.js';
+import {deriveMap, filterUndefinedAndNullAsync} from '../../resources/stores/utils.js';
 import type {Table} from 'dexie';
 import {sendMessage, type SendMessageOptions} from './send.js';
+import type {ReactiveStoreFront} from '@lib/internal/resources/stores/ReactiveStoreFront.js';
 
 export interface MessageListConstraints {
     /**
@@ -176,15 +173,10 @@ export function createRoomMessagesHandle(connection: Connection, members: RoomMe
             [members.map(room), connection.keychain.roomKeys()]
         );
 
-    /**
-     * Returns a map of room IDs to the date of their last message (not in a thread).
-     * This is used to display the "last message at" date in the room list.
-     * Note: This only includes rooms that have at least one message.
-     */
-    const lastMessageAtMap = () => records.list.get(
-        'lastMessageAtMap',
+    const lastMessagesRaw = () => records.list.get(
+        'lastMessages',
         async (table) => {
-            const map = new Map<number, Date>();
+            const map = new Map<number, ResourceStoredType<'room_message'>>();
 
             const collection = table.where('[thread_id+room_id+created_at]');
 
@@ -195,13 +187,42 @@ export function createRoomMessagesHandle(connection: Connection, members: RoomMe
                     // Because of the reverse sort, the first time we see a room_id,
                     // it's guaranteed to be its latest message.
                     if (!map.has(message.room_id)) {
-                        map.set(message.room_id, new Date(message.created_at));
+                        map.set(message.room_id, message);
                     }
                 });
 
-            return Array.from(map.entries());
-        })
-        .derive('map', (entries: any) => new Map<number, Date>(entries));
+            return Array.from(map.values());
+        });
+
+    /**
+     * Returns a map of room IDs to their last message (not in a thread).
+     * This is used to display the last message preview in the room list.
+     * Note: This only includes rooms that have at least one message.
+     */
+    const lastMessageMap = () => lastMessagesRaw()
+        .derive(
+            'models',
+            (resources, members, rooms, roomKeys) =>
+                filterUndefinedAndNullAsync(
+                    resources.map(resource => convertResourceToModel(resource, rooms.get(resource.room_id)!, members, roomKeys))
+                ),
+            [members.map(), (connection.client as any).rooms.map() as ReactiveStoreFront<Map<number, Room>>, connection.keychain.roomKeys()]
+        )
+        .derive('map', (entries: any) => deriveMap(entries, (entry: RoomMessage) => entry.room.id));
+
+    /**
+     * Returns a map of room IDs to the date of their last message (not in a thread).
+     * This is used to display the "last message at" date in the room list.
+     * Note: This only includes rooms that have at least one message.
+     */
+    const lastMessageAtMap = () => lastMessagesRaw()
+        .derive('map', (entries) => {
+            const map = new Map<number, Date>();
+            for (const message of entries) {
+                map.set(message.room_id, new Date(message.created_at));
+            }
+            return map;
+        });
 
     /**
      * Returns the number of unread messages in the room.
@@ -316,7 +337,7 @@ export function createRoomMessagesHandle(connection: Connection, members: RoomMe
     /**
      * Marks a message as read in the room.
      * This will update the message's "isRead" status and add the current user to the "readBy" list.
-     * @todo This should probably be debounced/throttled to avoid excessive updates when reading multiple messages quickly.
+     * @todo This should probably be debounced/throttled/batched to avoid excessive updates when reading multiple messages quickly.
      * @param room
      * @param message
      */
@@ -325,6 +346,7 @@ export function createRoomMessagesHandle(connection: Connection, members: RoomMe
 
     return {
         lastMessage,
+        lastMessageMap,
         lastMessageAtMap,
         count,
         countUnread,

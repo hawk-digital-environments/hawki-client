@@ -10,7 +10,7 @@ import {isNonEmptyString} from '../guards.js';
 import type {ResourceStoredType, ResourceType} from '../resources/resources.js';
 import type {RoomKeys} from '../encryption/keychain/KeychainHandle.js';
 import {decryptSymmetric, loadSymmetricCryptoValue} from '../encryption/symmetric.js';
-import {filterUndefinedAndNullAsync, limitAndOffset, limitAndOffsetKey} from '../resources/stores/utils.js';
+import {deriveMap, filterUndefinedAndNullAsync, limitAndOffset, limitAndOffsetKey} from '../resources/stores/utils.js';
 
 
 export interface RoomListConstraints {
@@ -137,6 +137,14 @@ export const RoomFeature = defineFeature((connection) => {
         );
 
     /**
+     * Returns a map of rooms keyed by their ID.
+     * @param constraints
+     */
+    const map = (constraints?: RoomListConstraints) =>
+        list(constraints)
+            .derive('map', rooms => deriveMap(rooms, room => room.id));
+
+    /**
      * Remove a room.
      * This will remove the room for ALL members, so only use this if you are sure.
      * You must be a room admin to perform this action.
@@ -230,6 +238,7 @@ export const RoomFeature = defineFeature((connection) => {
         create,
         update,
         list,
+        map,
         one,
         remove,
         setAvatar,
