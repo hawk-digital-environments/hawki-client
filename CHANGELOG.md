@@ -1,3 +1,12 @@
+# [1.2.0](https://github.com/hawk-digital-environments/hawki-client/compare/v1.1.4...v1.2.0) (2025-12-01)
+
+
+### Features
+
+* add some additional getters to the room handles ([ff38b11](https://github.com/hawk-digital-environments/hawki-client/commit/ff38b113a00711432dcf77b16454465b51a5393f))
+
+
+
 ## [1.1.4](https://github.com/hawk-digital-environments/hawki-client/compare/v1.1.3...v1.1.4) (2025-10-23)
 
 
@@ -34,15 +43,6 @@
 
 * remove php packagfile ([2e3611a](https://github.com/hawk-digital-environments/hawki-client/commit/2e3611aa49f01749f260ed0529974a5a88cd8b8f))
 * remove php packagfile ([43261b7](https://github.com/hawk-digital-environments/hawki-client/commit/43261b709e235ce98e33e32e57eba6d0e531b838))
-
-
-
-# [1.1.0](https://github.com/hawk-digital-environments/hawki-client/compare/v0.1.0...v1.1.0) (2025-10-23)
-
-
-### Features
-
-* refactoring done ([21263a9](https://github.com/hawk-digital-environments/hawki-client/commit/21263a9bf777b800e8ac9537d616b034e324cf21))
 
 
 
