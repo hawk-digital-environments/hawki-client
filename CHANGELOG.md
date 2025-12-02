@@ -1,3 +1,12 @@
+# [1.4.0](https://github.com/hawk-digital-environments/hawki-client/compare/v1.3.0...v1.4.0) (2025-12-02)
+
+
+### Features
+
+* make common types externally available ([2f4022c](https://github.com/hawk-digital-environments/hawki-client/commit/2f4022cfc370a7dcdd4c8db0661b6339b9deea9f))
+
+
+
 # [1.3.0](https://github.com/hawk-digital-environments/hawki-client/compare/v1.2.0...v1.3.0) (2025-12-01)
 
 
@@ -38,15 +47,6 @@
 
 * configure files to publish ([12136c3](https://github.com/hawk-digital-environments/hawki-client/commit/12136c3ece24be427217a00bec3e8bb645d066ae))
 * ensure dynamic version replacement (including rc versions) ([36e53a5](https://github.com/hawk-digital-environments/hawki-client/commit/36e53a5f4552b51efd0a1cab38149af4c26fce54))
-
-
-
-## [1.1.2](https://github.com/hawk-digital-environments/hawki-client/compare/v1.1.1...v1.1.2) (2025-10-23)
-
-
-### Bug Fixes
-
-* ensure dynamic version replacement ([f03fccf](https://github.com/hawk-digital-environments/hawki-client/commit/f03fccf60587694fa182777f2d006c04aa18f540))
 
 
 
